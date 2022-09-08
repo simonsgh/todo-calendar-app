@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import { socketURI } from '../utils/environment';
 
-const socket = io(`ws://${socketURI}`, { transports: ['websocket'] });
+const socket = io(socketURI, { transports: ['websocket'] });
 
 function useSocket() {
   return socket;
