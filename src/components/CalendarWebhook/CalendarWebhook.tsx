@@ -2,8 +2,6 @@ import React, { useMemo } from 'react';
 
 import { formatHours } from '../../utils/dates';
 
-import { ReactComponent as DataObjectIcon } from '../../assets/svg/DataObject.svg';
-
 export interface ICalendarWebhook {
   _id: string;
   path: string;
@@ -17,21 +15,19 @@ function CalendarWebhook({ webhook }: { webhook: ICalendarWebhook }) {
   const date = useMemo(() => formatHours(webhook.date), [webhook]);
   const body = useMemo(() => JSON.stringify(webhook.body, null, 2), [webhook]);
   return (
-    <div className="grid grid-rows-2 px-1 group">
+    <div className="p-1 group">
       <div>
-        <div className="whitespace-nowrap">{date}</div>
+        <time className="whitespace-nowrap" dateTime={webhook.date} title={webhook.date}>
+          {date}
+        </time>
+        <span className="pl-1">{webhook.path}</span>
       </div>
-      <div className="flex gap-0.5 items-center">
-        <div>
-          <div className="h-2 w-2" style={{ backgroundColor: webhook.color }}></div>
-        </div>
-        <div className="w-full pl-1" title={webhook.name}>
-          {webhook.path}
-        </div>
-        <div>
-          <DataObjectIcon title={body} className="block h-5 w-5 invisible group-hover:visible" />
-        </div>
-      </div>
+      <details>
+        <summary className="cursor-pointer" style={{ color: webhook.color }}>
+          <span className="text-black">{webhook.name}</span>
+        </summary>
+        <output>{body}</output>
+      </details>
     </div>
   );
 }
