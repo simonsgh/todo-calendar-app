@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 
 import useFormControl from '../../hooks/useFormControl';
 import { tailwindColors } from '../../constants/colors';
+import { webhookApi } from '../../utils/environment';
 
 import FormControl from '../FormControl/FormControl';
 
@@ -19,7 +20,7 @@ interface EventFormProps extends EventDTO {
   buttonLabel: string;
 }
 
-const webhooksURL = `${window.location.protocol}//${window.location.host}/webhooks`;
+const webhooksURL = `${webhookApi}/webhooks`;
 
 function EventForm({
   name: initialName,
