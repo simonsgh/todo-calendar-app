@@ -26,7 +26,13 @@ function CalendarEvent({ event }: { event: ICalendarEvent }) {
     <div className="grid grid-rows-2 px-1 group">
       <div>
         <div className="whitespace-nowrap">
-          <span title={event.start}>{start}</span> - <span title={event.end}>{end}</span>
+          <time dateTime={event.start} title={event.start}>
+            {start}
+          </time>{' '}
+          -{' '}
+          <time dateTime={event.end} title={event.end}>
+            {end}
+          </time>
         </div>
       </div>
       <div className="flex gap-0.5 items-center">
